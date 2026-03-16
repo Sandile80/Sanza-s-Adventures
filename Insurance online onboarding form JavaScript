@@ -1,0 +1,193 @@
+document.addEventListener("DOMContentLoaded", function() {
+
+  // STEP NAVIGATION
+
+  const steps = document.querySelectorAll(".step");
+
+  let currentStep = 0;
+
+  const nextButtons = document.querySelectorAll(".next-btn");
+
+  const backButtons = document.querySelectorAll(".back-btn");
+
+  function showStep(index) {
+
+  steps.forEach((step, i) => {
+
+    step.classList.toggle("active", i === index);
+
+  });
+
+  // If we are on Step 3 (Signature Step)
+
+  if (index === 2) {
+
+    setTimeout(() => {
+
+      canvas.width = canvas.offsetWidth;
+
+      canvas.height = 200;
+
+    }, 100);
+
+  }
+
+}
+
+ 
+
+  nextButtons.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+      if (currentStep < steps.length - 1) {
+
+        currentStep++;
+
+        showStep(currentStep);
+
+      }
+
+    });
+
+  });
+
+ 
+
+  backButtons.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+      if (currentStep > 0) {
+
+        currentStep--;
+
+        showStep(currentStep);
+
+      }
+
+    });
+
+  });
+
+ 
+
+  showStep(currentStep);
+
+ 
+
+  // SIGNATURE PAD
+
+  const canvas = document.getElementById("signature-pad");
+
+  const ctx = canvas.getContext("2d");
+
+ 
+
+  // Fix canvas size properly
+
+  function resizeCanvas() {
+
+    canvas.width = canvas.offsetWidth;
+
+    canvas.height = 200;
+
+  }
+
+ 
+
+  resizeCanvas();
+
+  window.addEventListener("resize", resizeCanvas);
+
+ 
+
+  let drawing = false;
+
+ 
+
+  function startDraw(e) {
+
+    drawing = true;
+
+    draw(e);
+
+  }
+
+ 
+
+  function endDraw() {
+
+    drawing = false;
+
+    ctx.beginPath();
+
+  }
+
+ 
+
+  function draw(e) {
+
+    if (!drawing) return;
+
+ 
+
+    const rect = canvas.getBoundingClientRect();
+
+ 
+
+    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+
+    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+ 
+
+    ctx.lineWidth = 2;
+
+    ctx.lineCap = "round";
+
+ 
+
+    ctx.lineTo(x, y);
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.moveTo(x, y);
+
+  }
+
+ 
+
+  // Mouse Events
+
+  canvas.addEventListener("mousedown", startDraw);
+
+  canvas.addEventListener("mouseup", endDraw);
+
+  canvas.addEventListener("mousemove", draw);
+
+ 
+
+  // Touch Events (for mobile)
+
+  canvas.addEventListener("touchstart", startDraw);
+
+  canvas.addEventListener("touchend", endDraw);
+
+  canvas.addEventListener("touchmove", draw);
+
+ 
+
+  document.getElementById("clear-signature")
+
+  .addEventListener("click", () => {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  });
+
+ 
+
+});
