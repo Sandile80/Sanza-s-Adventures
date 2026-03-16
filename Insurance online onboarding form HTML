@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Insurance Application</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <img src="Images Nora/IMG-20260316-WA0009.jpg" alt="Company Logo" class="logo" width="600" height="300" />
+    <h1>Application Form</h1>
+    <p>Please complete the form below to apply for cover.</p>
+
+    <form id="onboardingForm">
+
+      <!-- STEP 1 -->
+      <div class="step active">
+        <h2>Personal Information</h2>
+
+        <label>Full Name</label>
+        <input type="text" name="name" required />
+
+        <label>Email</label>
+        <input type="email" name="email" required />
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required />
+
+        <button type="button" class="next-btn">Next</button>
+      </div>
+
+      <!-- STEP 2 -->
+
+      <div class="step">
+        <h2>Policy Interest</h2>
+
+        <label>Type of Insurance</label>
+        <select name="policy_type" required>
+
+          <option value="">-- Select --</option>
+          <option>Motor</option>
+          <option>Home</option>
+          <option>Life</option>
+          <option>Funeral</option>
+        </select>
+
+        <div class="buttons">
+          <button type="button" class="back-btn">Back</button>
+          <button type="button" class="next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step">
+        <h2>Consent & Signature</h2>
+
+      <p>Please review and sign below:</p>
+
+  <div class="consent-box">
+    <p>
+      I confirm that the information provided is true and correct.
+      I consent to the processing of my personal information
+      for insurance underwriting and policy administration.
+    </p>
+  </div>
+
+  <canvas id="signature-pad"></canvas>
+
+  <button type="button" id="clear-signature">Clear Signature</button>
+
+  <div class="buttons">
+    <button type="button" class="back-btn">Back</button>
+    <button type="submit">Submit Application</button>
+  </div>
+</div>
+
+<script src="script.js"> </script>
+</body>
+</html>
